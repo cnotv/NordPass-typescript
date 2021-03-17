@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {IItem} from "~/services/getUserItems";
-import logout from '../../../../services/logout';
+import logout from '~/services/logout';
 
 import './header-style.scss';
 
