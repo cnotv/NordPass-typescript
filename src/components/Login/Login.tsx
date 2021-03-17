@@ -2,6 +2,7 @@ import {SyntheticEvent, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '~/constants';
 import login from '~/services/login';
+import { isWeakPassword } from '~/utils/passwordValidation';
 import ErrorBlock from '../ErrorBlock';
 
 import './login-style.scss';
@@ -11,16 +12,35 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorPassword, setErrorPassword] = useState<string>();
+  const [errorUsername, setErrorUsername] = useState<string>();
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
+    setErrorPassword(null);
+    setErrorUsername(null);
+    
+    if (username === null || username.length === 0) {
+      setErrorUsername('Please choose an username');
+      return;
+    }
+
+    if (password === null || password.length === 0) {
+      setErrorPassword('Please insert password');
+      return;
+    }
+
+    if (isWeakPassword(password)) {
+      setErrorPassword('Your password is weak');
+      return;
+    }
 
     try {
       await login(username, password);
       push(Routes.PasswordHealth);
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage('User or password are incorrect');
     }
   };
 
@@ -37,6 +57,9 @@ const Login = () => {
           type="text"
           className="input mt-52px"
         />
+        <div className="mt-6px">
+          <ErrorBlock error={errorUsername}/>
+        </div>
         <input
           value={password}
           onChange={(event) => setPassword(event.target.value)}
@@ -44,7 +67,12 @@ const Login = () => {
           type="password"
           className="input mt-24px"
         />
-        <ErrorBlock error={errorMessage}/>
+        <div className="mt-6px">
+          <ErrorBlock error={errorPassword}/>
+        </div>
+        <div className="mt-6px">
+          <ErrorBlock error={errorMessage}/>
+        </div>
         <button type="submit" className="button mt-24px">
           Login
         </button>
