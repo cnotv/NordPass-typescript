@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import { useUserContext } from '../UserContext';
 
 import List from './components/List/List';
 import useItemsProvider from './useItemsProvider';
@@ -10,7 +11,8 @@ import {Routes} from '~/constants';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
 import itemIsOld from '~/utils/itemIsOld';
-import { useUserContext } from '../UserContext';
+import { itemIsVulnerable } from "~/utils/itemIsVulnerable";
+
 
 const PasswordHealth = () => {
   const {
@@ -35,7 +37,7 @@ const PasswordHealth = () => {
 
   return (
     <div className="container">
-      <Header items={items} username={username} />
+      <Header items={items.filter(item => itemIsVulnerable(item, items))} username={username} />
       <Filter items={items}/>
       <Switch>
         <Route exact path={Routes.PasswordHealth}>
