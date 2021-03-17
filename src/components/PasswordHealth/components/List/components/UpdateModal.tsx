@@ -13,6 +13,8 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
 
+  Modal.setAppElement('body')
+
   return (
     <>
       <button className="update" onClick={() => setShowModal(true)}>
