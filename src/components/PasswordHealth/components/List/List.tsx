@@ -13,8 +13,11 @@ interface IList {
 const List: FC<IList> = ({ items }) => (
   <ul className="list">
     {
-      items.map((item) => (
-        <li className="item">
+      items.map((item, key) => (
+        <li
+          key={key}
+          className="item"
+        >
           <ItemIcon title={item.title} />
           <div>
             <div className="title">
