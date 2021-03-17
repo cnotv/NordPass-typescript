@@ -1,13 +1,15 @@
+import { Route, Switch } from "react-router-dom";
+
 import List from './components/List/List';
 import useItemsProvider from './useItemsProvider';
 import ErrorBlock from '../ErrorBlock';
 import Filter from './components/Filter/Filter';
 import LoadingScreen from '../LoadingScreen';
 import Header from './components/Header/Header';
-import {Route, Switch} from "react-router-dom";
 import {Routes} from '~/constants';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
+import itemIsOld from '~/utils/itemIsOld';
 import { useUserContext } from '../UserContext';
 
 const PasswordHealth = () => {
@@ -44,6 +46,9 @@ const PasswordHealth = () => {
         </Route>
         <Route path={Routes.Reused}>
           <List items={items.filter((item) => itemHasReusedPassword(item, items))}/>
+        </Route>
+        <Route path={Routes.Old}>
+          <List items={items.filter(itemIsOld)}/>
         </Route>
       </Switch>
     </div>
