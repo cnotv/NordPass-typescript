@@ -1,5 +1,4 @@
 import itemHasWeakPassword from '../itemHasWeakPassword';
-import { IItem } from '../../services/getUserItems';
 
 // Todo fix problem that causes this test to fail
 describe('should return true if password do not match requirements', () => {

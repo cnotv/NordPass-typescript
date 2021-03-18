@@ -1,4 +1,3 @@
-import {IItem} from "~/services/getUserItems";
 import { isWeakPassword } from "./passwordValidation";
 
 const itemHasWeakPassword = (item: IItem) => {

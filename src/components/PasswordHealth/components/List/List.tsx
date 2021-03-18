@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-import { IItem } from "~/services/getUserItems";
 import ItemIcon from './components/ItemIcon';
 import UpdateModal from './components/UpdateModal';
 

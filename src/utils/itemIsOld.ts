@@ -1,5 +1,3 @@
-import {IItem} from "~/services/getUserItems";
-
 const itemIsOld = (item: IItem) => {
   const { createdAt } = item;
 

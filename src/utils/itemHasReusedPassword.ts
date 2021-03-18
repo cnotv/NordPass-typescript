@@ -1,4 +1,3 @@
-import {IItem} from "~/services/getUserItems";
 
 const itemHasReusedPassword = (item: IItem, itemList: Array<IItem>) => {
   const reusedItems = itemList.filter((listItem) => (

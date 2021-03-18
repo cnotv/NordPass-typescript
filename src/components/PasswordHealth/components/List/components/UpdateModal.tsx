@@ -3,7 +3,6 @@ import { FC, SyntheticEvent, useState } from 'react';
 import Modal from 'react-modal';
 
 import updateItem from '~/services/updateItem';
-import { IItem } from '~/services/getUserItems';
 
 import './UpdateModal.scss';
 
