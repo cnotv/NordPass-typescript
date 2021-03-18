@@ -11,6 +11,7 @@ const Login = () => {
   const {push} = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [errorPassword, setErrorPassword] = useState<string>();
   const [errorUsername, setErrorUsername] = useState<string>();
@@ -20,7 +21,7 @@ const Login = () => {
     setErrorMessage(null);
     setErrorPassword(null);
     setErrorUsername(null);
-    
+
     if (username === null || username.length === 0) {
       setErrorUsername('Please choose an username');
       return;
@@ -36,11 +37,15 @@ const Login = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       await login(username, password);
       push(Routes.PasswordHealth);
     } catch (error) {
       setErrorMessage('User or password are incorrect');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,9 +78,11 @@ const Login = () => {
         <div className="mt-6px">
           <ErrorBlock error={errorMessage}/>
         </div>
-        <button type="submit" className="button mt-24px">
-          Login
-        </button>
+        <button
+          type="submit"
+          className="button mt-24px"
+          disabled={isLoading}
+        >{isLoading ? 'Loading...' : 'Login'}</button>
       </form>
     </div>
   )

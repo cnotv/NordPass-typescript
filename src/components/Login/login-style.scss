@@ -1,3 +1,5 @@
+@import '../../style/_variables';
+
 .login-page {
   background: url('/public/assets/mountain.jpg');
   background-size: cover;
@@ -16,5 +18,11 @@
     padding: 50px;
     width: 350px;
     height: 400px;
+  }
+
+  .button {
+    &[disabled] {
+      background: grey;
+    }
   }
 }
