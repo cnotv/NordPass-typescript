@@ -1,4 +1,4 @@
-import itemHasReusedPassword from '../itemHasReusedPassword';
+import { ItemCheck } from "../itemCheck";
 
 const items = [
    {
@@ -25,6 +25,6 @@ const items = [
 ]
 
 test('should return true if there is more than one item with same password', () => {
-   expect(itemHasReusedPassword(items[0], items)).toBe(false);
-   expect(itemHasReusedPassword(items[2], items)).toBe(true);
+   expect(ItemCheck.hasReusedPassword(items[0], items)).toBe(false);
+   expect(ItemCheck.hasReusedPassword(items[2], items)).toBe(true);
 });

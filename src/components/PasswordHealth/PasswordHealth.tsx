@@ -8,10 +8,7 @@ import Filter from './components/Filter/Filter';
 import LoadingScreen from '../LoadingScreen';
 import Header from './components/Header/Header';
 import { Routes } from '~/constants';
-import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
-import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
-import itemIsOld from '~/utils/itemIsOld';
-import itemIsVulnerable from "~/utils/itemIsVulnerable";
+import { ItemCheck } from "~/utils/itemCheck";
 
 
 const PasswordHealth = () => {
@@ -37,20 +34,20 @@ const PasswordHealth = () => {
 
   return (
     <div className="container">
-      <Header items={items.filter(item => itemIsVulnerable(item, items))} username={username} />
+      <Header items={items.filter(item => ItemCheck.isVulnerable(item, items))} username={username} />
       <Filter items={items} />
       <Switch>
         <Route exact path={Routes.PasswordHealth}>
           <List items={items} />
         </Route>
         <Route path={Routes.Weak}>
-          <List items={items.filter(itemHasWeakPassword)} />
+          <List items={items.filter(ItemCheck.hasWeakPassword)} />
         </Route>
         <Route path={Routes.Reused}>
-          <List items={items.filter((item) => itemHasReusedPassword(item, items))} />
+          <List items={items.filter((item) => ItemCheck.hasReusedPassword(item, items))} />
         </Route>
         <Route path={Routes.Old}>
-          <List items={items.filter(itemIsOld)} />
+          <List items={items.filter(ItemCheck.isOld)} />
         </Route>
       </Switch>
     </div>

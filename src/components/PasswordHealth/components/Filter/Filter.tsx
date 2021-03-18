@@ -1,27 +1,24 @@
 import { FC } from 'react';
 import { Routes } from "~/constants";
+import { ItemCheck } from '~/utils/itemCheck';
 import FilterTab from "./components/FilterTab"
 
 import './filter-style.scss';
-import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
-import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
-import itemIsOld from '~/utils/itemIsOld';
-
 interface IFilter {
   items: Array<IItem>;
 }
 
 const Filter: FC<IFilter> = ({items}) => {
   const weakItemsCount = items.reduce((count, item) => (
-    itemHasWeakPassword(item) ? (count + 1) : count
+    ItemCheck.hasWeakPassword(item) ? (count + 1) : count
   ), 0)
 
   const reusedItemsCount = items.reduce((count, item) => (
-    itemHasReusedPassword(item, items) ? (count + 1) : count
+    ItemCheck.hasReusedPassword(item, items) ? (count + 1) : count
   ), 0)
 
   const oldItemsCount = items.reduce((count, item) => (
-    itemIsOld(item) ? (count + 1) : count
+    ItemCheck.isOld(item) ? (count + 1) : count
   ), 0)
 
   return (
