@@ -11,7 +11,6 @@ import useItemsProvider from './useItemsProvider';
 import Filter from './components/Filter/Filter';
 import Header from './components/Header/Header';
 
-
 const PasswordHealth = () => {
   const {
     errorMessage: userProviderErrorMessage,
@@ -33,23 +32,35 @@ const PasswordHealth = () => {
     return <ErrorBlock error={userProviderErrorMessage || errorMessage} />
   }
 
+  const routes = [
+    {
+      path: Routes.PasswordHealth,
+      items
+    },
+    {
+      path: Routes.Weak,
+      items: items.filter(ItemCheck.hasWeakPassword)
+    },
+    {
+      path: Routes.Reused,
+      items: items.filter((item) => ItemCheck.hasReusedPassword(item, items))
+    },
+    {
+      path: Routes.Old,
+      items: items.filter(ItemCheck.isOld)
+    }
+  ]
+
   return (
     <div className="container">
       <Header items={items.filter(item => ItemCheck.isVulnerable(item, items))} username={username} />
       <Filter items={items} />
       <Switch>
-        <Route exact path={Routes.PasswordHealth}>
-          <List items={items} />
-        </Route>
-        <Route path={Routes.Weak}>
-          <List items={items.filter(ItemCheck.hasWeakPassword)} />
-        </Route>
-        <Route path={Routes.Reused}>
-          <List items={items.filter((item) => ItemCheck.hasReusedPassword(item, items))} />
-        </Route>
-        <Route path={Routes.Old}>
-          <List items={items.filter(ItemCheck.isOld)} />
-        </Route>
+        {routes.map(({ path, items }, i) =>
+          <Route exact path={path} key={i}>
+            <List items={items} />
+          </Route>
+        )}
       </Switch>
     </div>
   );
