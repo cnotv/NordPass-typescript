@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Redirect, Switch} from 'react-router-dom';
 
-import Login from './components/Login/Login';
-import PasswordHealth from './components/PasswordHealth/PasswordHealth';
+import Login from './pages/Login/Login';
+import PasswordHealth from './pages/PasswordHealth/PasswordHealth';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import {Routes} from './constants';

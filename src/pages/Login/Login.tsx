@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {Routes} from '~/constants';
 import login from '~/services/login';
 import { isWeakPassword } from '~/utils/passwordValidation';
-import ErrorBlock from '../ErrorBlock';
+import ErrorBlock from '~/components/ErrorBlock';
 
 import './login-style.scss';
 

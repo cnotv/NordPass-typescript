@@ -1,14 +1,15 @@
 import { Route, Switch } from "react-router-dom";
-import { useUserContext } from '../UserContext';
+
+import { useUserContext } from '~/components/UserContext';
+import ErrorBlock from '~/components/ErrorBlock';
+import LoadingScreen from '~/components/LoadingScreen';
+import { Routes } from '~/constants';
+import { ItemCheck } from "~/utils/itemCheck";
 
 import List from './components/List/List';
 import useItemsProvider from './useItemsProvider';
-import ErrorBlock from '../ErrorBlock';
 import Filter from './components/Filter/Filter';
-import LoadingScreen from '../LoadingScreen';
 import Header from './components/Header/Header';
-import { Routes } from '~/constants';
-import { ItemCheck } from "~/utils/itemCheck";
 
 
 const PasswordHealth = () => {
