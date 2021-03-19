@@ -48,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
       setEmail(data?.email);
       setId(data?.id);
     } catch (error) {
-      setErrorMessage(error.message);
+      localStorage.removeItem('token')
     }
 
     setIsLoading(false);
