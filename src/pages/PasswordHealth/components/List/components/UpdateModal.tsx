@@ -1,6 +1,7 @@
 
 import { FC, SyntheticEvent, useState } from 'react';
 import Modal from 'react-modal';
+import { useUserItemsContext } from '~/components/UserItemsContext';
 
 import updateItem from '~/services/updateItem';
 
@@ -14,6 +15,10 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
 
+  const {
+    updateItems
+  } = useUserItemsContext();
+  
   Modal.setAppElement('body')
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
@@ -23,6 +28,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
       password: newPass,
     })
 
+    updateItems();
     closeModal();
   }
 

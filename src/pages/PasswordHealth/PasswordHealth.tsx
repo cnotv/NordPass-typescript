@@ -7,7 +7,7 @@ import { Routes } from '~/constants';
 import { ItemCheck } from "~/utils/itemCheck";
 
 import List from './components/List/List';
-import useItemsProvider from './useItemsProvider';
+import { useUserItemsContext } from '../../components/UserItemsContext';
 import Filter from './components/Filter/Filter';
 import Header from './components/Header/Header';
 
@@ -22,7 +22,7 @@ const PasswordHealth = () => {
     items,
     isLoading,
     errorMessage,
-  } = useItemsProvider();
+  } = useUserItemsContext();
 
   if (isLoading || userDataIsLoading) {
     return <LoadingScreen />
