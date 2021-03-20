@@ -30,17 +30,12 @@ const Login = () => {
     setErrorUsername(null);
 
     if (username === null || username.length === 0) {
-      setErrorUsername('Please choose an username');
+      setErrorUsername('Please insert username');
       return;
     }
 
     if (password === null || password.length === 0) {
       setErrorPassword('Please insert password');
-      return;
-    }
-
-    if (isWeakPassword(password)) {
-      setErrorPassword('Your password is weak');
       return;
     }
 
