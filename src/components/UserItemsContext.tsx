@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Routes } from "~/constants";
 import getUserItems from "~/services/getUserItems";
 
 interface IUserItems {
@@ -21,6 +23,7 @@ export const UserItemsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [items, setItems] = useState<Array<IItem>>([]);
+  const {push} = useHistory();
 
   const updateItems = async () => {
     setErrorMessage(null);
@@ -31,7 +34,7 @@ export const UserItemsContextProvider = ({ children }) => {
 
       setItems(userItems);
     } catch (error) {
-      setErrorMessage(error.message);
+      push(Routes.Login);
     }
 
     setIsLoading(false);
