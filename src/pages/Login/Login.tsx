@@ -1,4 +1,4 @@
-import {SyntheticEvent, useState} from 'react';
+import {SyntheticEvent, useEffect, useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '~/constants';
 import login from '~/services/login';
@@ -15,6 +15,13 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [errorPassword, setErrorPassword] = useState<string>();
   const [errorUsername, setErrorUsername] = useState<string>();
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    }
+  }, []);
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
