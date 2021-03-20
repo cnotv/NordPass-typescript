@@ -15,7 +15,7 @@ const PasswordHealth = () => {
   const {
     errorMessage: userProviderErrorMessage,
     isLoading: userDataIsLoading,
-    username,
+    user,
   } = useUserContext();
 
   const {
@@ -53,7 +53,7 @@ const PasswordHealth = () => {
 
   return (
     <div className="container">
-      <Header items={items.filter(item => ItemCheck.isVulnerable(item, items))} username={username} />
+      <Header items={items.filter(item => ItemCheck.isVulnerable(item, items))} username={user?.username} />
       <Filter items={items} />
       <Switch>
         {routes.map(({ path, items }, i) =>
