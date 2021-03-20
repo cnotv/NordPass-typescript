@@ -1,7 +1,6 @@
 import { ItemCheck } from "../itemCheck";
 
-// Todo fix problem that causes this test to fail
-describe('should return true if password do not match requirements', () => {
+describe('FX: hasWeakPassword should return true if password do not match requirements', () => {
   test.each([
     [
       true,

@@ -18,12 +18,13 @@ export namespace ItemCheck {
   export const isOld = (item: IItem) => {
     const { createdAt } = item;
 
+    const expiration = new Date();
+    expiration.setDate(expiration.getDate() - 30);
+
     // Probably would be better to use Moment.js or date-fsn to check the timezoned value
-    return new Date(createdAt).getDay() > 30;
+    return new Date(createdAt) < expiration;
   };
 
   export const isVulnerable = (item: IItem, items: IItem[]) =>
-    hasReusedPassword(item, items) ||
-    hasWeakPassword(item) ||
-    isOld(item);
+    hasReusedPassword(item, items) || hasWeakPassword(item) || isOld(item);
 }
