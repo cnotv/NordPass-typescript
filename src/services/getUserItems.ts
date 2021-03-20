@@ -6,15 +6,19 @@ const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
     userId,
   });
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  return data.items;
+    return data.items;
+  } catch (error) {
+    throw Error(error);
+  }
 };
 
 export default getUserItems;
