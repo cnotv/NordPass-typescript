@@ -1,4 +1,4 @@
-import { API } from "~/constants";
+import { API } from "./../constants";
 import getUrl from "../utils/getUrl";
 
 export const getUser = async (): Promise<User> => {
