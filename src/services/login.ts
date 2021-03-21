@@ -7,11 +7,13 @@ const login = async (username: string, password: string) => {
     password,
   });
 
-  const response = await fetch(url);
-  const data = await response.json();
-  const { token } = data;
-
-  localStorage.setItem('token', token);
+  try {
+    const response = await fetch(url);
+    const { token } = await response.json();
+    localStorage.setItem('token', token);
+  } catch (error) {
+    throw Error(error);
+  }
 };
 
 export default login;

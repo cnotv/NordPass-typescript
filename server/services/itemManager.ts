@@ -3,7 +3,10 @@ import { passwords } from '../data';
 let items = [];
 
 export const updateItem = (item) => {
-  items.push(item);
+  items = [
+    ...items.filter(x => x.id !== item.id),
+    item
+  ]
 };
 
 export const getItems = () => {
